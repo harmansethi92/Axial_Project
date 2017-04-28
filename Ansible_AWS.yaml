@@ -1,0 +1,43 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+  - name: security group
+    ec2_group:
+      name: Ansible
+      description: Security Group
+      region: us-west-2
+      rules:
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 80
+          to_port: 80
+          cidr_ip: 0.0.0.0/0
+      rules_egress:
+        - proto: all
+          cidr_ip: 0.0.0.0/0
+    register: firewall
+  - name: Provision a set of instances
+    ec2:
+      key_name: Ansible_AWS
+      region: us-west-2
+      instance_type: t2.micro
+      vpc_subnet_id: subnet-11027e76
+      image: ami-2ffa634f
+      assign_public_ip: yes
+      group: Ansible
+      wait: true
+      exact_count: 1
+      count_tag:
+        Name: Demo
+      instance_tags:
+        Name: Demo
+    register: ec2
+
+
+
+
+
