@@ -1,0 +1,17 @@
+Terraform
+
+After my research and study in terraform for a day I would like to summarize that:
+
+1.Terraform is a good orchestration tool with Infrastructure as code approach.
+2.Terraform has a "planning" step where it generates an execution plan before execution.
+3.Terraform focuses on the higher-level abstraction of the datacenter and associated services, without sacrificing the ability to use configuration management tools to do what they do best.
+4. The terraform modules are pretty easy to read and write.
+5. It has a good integration with other tools and platforms
+
+Few Issues I figured out:
+1.You can write anything in your Terraform config and it will accept it as a valid plan.
+For example size of server "1000Zillion bytes" or Ubuntu 24.4 got accepted in the terraform plan stage
+2.The docs for Terraform cover only the basics. For anything beyond that you have to look elsewhere
+
+
+I believe that Terraform could be combined with Configuration Management tools such as Ansible, Chef, Puppet etc. This would be a good combination to deploy configurations to servers through Configuration Management tools and Provision those with Terraform.
