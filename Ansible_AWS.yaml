@@ -1,3 +1,7 @@
+# I have installed the AWSCLI and entered my AWS_Access_key and AWS_secret_key to authorize access on my local machine.
+# I have created a security group to allow tcp connections through port 22 and 80
+# I'm spinning up a linux EC2 instance on my AWS account
+
 - hosts: localhost
   connection: local
   gather_facts: False
@@ -23,10 +27,10 @@
   - name: Provision a set of instances
     ec2:
       key_name: Ansible_AWS
-      region: us-west-2
-      instance_type: t2.micro
-      vpc_subnet_id: subnet-11027e76
-      image: ami-2ffa634f
+      region: us-west-2                          # Region of Instance
+      instance_type: t2.micro                    # Instance-type
+      vpc_subnet_id: subnet-11027e76             # This is my default-vpc subnet ID
+      image: ami-2ffa634f                        # This is an image which I created
       assign_public_ip: yes
       group: Ansible
       wait: true
