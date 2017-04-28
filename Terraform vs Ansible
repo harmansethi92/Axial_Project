@@ -35,3 +35,8 @@ Using Ansible over time, as you apply more and more updates, each server builds 
 Using terraform to deploy a new version, you would create a new image using Docker with the new version of your software already installed, deploy that image across a set of totally new servers, and then undeploy the old servers. This approach reduces the likelihood of configuration drift bugs. 
 
 4. The terraform modules are easier to read and write in comparison to Ansible.
+
+5.Terraform is relaying heavily on state files, where Ansible is more “stateless”. As a result, Ansible is a very flexible tool that is useful in a highly dynamic environment like a cloud environment.
+The flip side of the flexibility of Ansible is that not knowing what the current state is can lead to uncertainty and risk when using Ansible.
+
+6. Ansible playbooks are in Yaml, Python or JSON formats while Terraform is in Hashicorp Script whic requires to learn another language.
