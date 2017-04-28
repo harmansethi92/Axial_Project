@@ -1,6 +1,6 @@
 # Axial_Project
 
-This Repositoy taks about:
+This Repositoy talks about:
 
 1.Sensu 
 
