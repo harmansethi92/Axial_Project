@@ -1,0 +1,27 @@
+Sensu:
+
+From my research in a day's time I could make out that Sensu is a more modern Nagios.It is a pretty good open source push based monitoring tool. It’s written in ruby + JSON. It is well suited for modern cloud infrastructure which is elastic and dynamic.Sensu messages are passed via rabbitmq message broker. Redis is used to store data. You can use sensu to monitor servers, services, process, application health and business KPI’s. Sensu supports plugins from are nagios, shell scripts, perl, ruby, zabbix, icinga, etc. Sensu is a best replacement for Nagios, if you are running into issues of scale due to pull based natured of Nagios monitoring. Sensu Uchiwa and Sensu Enterprise Dashboards for displaying and managing events and clients.
+
+Architecture:
+1.Secure Transport
+2.Data Store
+3.Check Execution Scheduler
+4.Monitoring Agent
+5.Event Processor
+6.RESTful API
+
+Features:
+1. Orchestrates check execution
+2. Triggers event handlers
+3. Scaling is pretty easy
+4. Plugins: Networking & System Resources,Web Servers & Proxies,Databases, Indexing, Search,Message Queues etc 
+
+Cons:
+Sensu Enterprise is a full product and has additional built in features. But it is a paid product
+DB is external
+
+
+Suggestion:
+If you have an existing Nagios setup that you wish to scale as-is or taking advantage of the registration feature of Sensu, then Sensu is a good choice.
+
+If you want to do whitebox monitoring, or have a very dynamic or cloud based environment, then Prometheus is a better choice.
