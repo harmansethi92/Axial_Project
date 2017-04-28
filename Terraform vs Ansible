@@ -1,0 +1,37 @@
+Terraform vs Ansible
+
+
+1. Orchestration vs Configuration Management
+Terraform is mostly used as an orchestration tool to provision the servers and Ansible as a Configuration Management to install and manage software on existing servers. These two categories are not mutually exclusive, as most configuration management tools can do some degree of provisioning and most orchestration tools can do some degree of configuration management. So it depends on our task whether it requires provisioning of servers or Configuration management.
+For example if you are using Docker then almost all your configuration management stuff is already done and you just need a server to deploy that container and provision those servers. So an orchestration tool would be a better fit in this case.
+
+2. Declarative approach vs Procedural Approach
+Terraform has a Declarative approach while Ansible has a Procedural approach. In terraform you write code that specifies your desired end state while in Ansible it is more a step by step approach.
+
+For example:
+Let's take our Ansible code above: We have deployed 1 server with certain parameters. Now suppose if we have deployed 5 servers with this configuration and want to scale it to 10 due to traffic we use this code:-
+
+- ec2:
+    count: 10
+    image: ami-v1    
+    instance_type: t2.micro
+
+But this would deploy 10 more new servers with same configuration. So you have to be a bit aware and remember what was your initial configuration by checking hostory logs in case of Ansible.
+
+With terraform , you just have to declare the end state which you want.
+
+resource "aws_instance" "example" {
+  count = 10
+  ami = "ami-v1"
+  instance_type = "t2.micro"
+}
+
+This would add 5 more servers to the previously configured 5 servers.
+
+What happens if you want to deploy version 2 of the image ? With the procedural approach,your previous Ansible templates are not useful, so you have to write yet another template to track down the 10 servers you deployed previously and carefully update each one to the new version. With the declarative approach of Terraform, you go back to the exact same template once again and simply change the ami version number to v2
+
+3. Mutable Infrastructure vs Immutable Infrastructure
+Using Ansible over time, as you apply more and more updates, each server builds up a unique history of changes. This often leads to a phenomenon known as configuration drift, where each server becomes slightly different than all the others.
+Using terraform to deploy a new version, you would create a new image using Docker with the new version of your software already installed, deploy that image across a set of totally new servers, and then undeploy the old servers. This approach reduces the likelihood of configuration drift bugs. 
+
+4. The terraform modules are easier to read and write in comparison to Ansible.
